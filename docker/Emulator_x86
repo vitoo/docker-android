@@ -201,6 +201,7 @@ COPY devices /root/devices
 # Run docker-appium
 #===================
 COPY src /root/src
+COPY 5bc1dc75.0 /root/
 COPY supervisord.conf /root/
 RUN chmod -R +x /root/src && chmod +x /root/supervisord.conf
 
