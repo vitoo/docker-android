@@ -19,9 +19,13 @@ services:
     environment:
       - DEVICE=Samsung Galaxy S6
       - APPIUM=true      
-      - HTTP_PROXY="http://vito_cerberus-executor_1:44444"
-      - HTTPS_PROXY="http://vito_cerberus-executor_1:44444"
+      - HTTP_PROXY="http://executor:44444"
+      - HTTPS_PROXY="http://executor:44444"
       - ENABLE_PROXY_ON_EMULATOR=true
+    depends_on:
+      - executor
+    links:
+      - executor
 
   executor:
     image: donvito/cerberus-executor:latest

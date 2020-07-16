@@ -52,19 +52,19 @@ function enable_proxy_if_needed () {
         echo "[EMULATOR] - Proxy-Port: ${p[1]}"
 
         wait_emulator_to_be_ready
-		sleep 25
+	
         echo "Enable proxy on Android emulator. Please make sure that docker-container has internet access!"
         adb root
 
         echo "Set up the Proxy"
-        adb shell "content update --uri content://telephony/carriers --bind proxy:s:"${p[0]}" --bind port:s:"${p[1]}" --where \"mcc=310\" --where \"mnc=260\""
+        adb shell "content update --uri content://telephony/carriers --bind proxy:s:"${p[0]}" --bind port:s:"${p[1]}" --where "mcc=310" --where "mnc=260""
 
-		echo "Install proxy certificate"
-		adb push ./5bc1dc75.0 /data/misc/user/0/cacerts-added/5bc1dc75.0
-		adb shell "su 0 chmod 644 /data/misc/user/0/cacerts-added/5bc1dc75.0"
-		
-		echo "Disable wifi"
-		adb shell "su 0 svc wifi disable"
+	echo "Install proxy certificate"
+	adb push ./5bc1dc75.0 /data/misc/user/0/cacerts-added/5bc1dc75.0
+	adb shell "su 0 chmod 644 /data/misc/user/0/cacerts-added/5bc1dc75.0"
+	
+	echo "Disable wifi"
+	adb shell "su 0 svc wifi disable"
 		
         adb unroot
       else
