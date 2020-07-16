@@ -1,0 +1,32 @@
+# Note: It requires docker-compose 1.13.0
+#
+# Usage: docker-compose up -d
+version: "2.2"
+
+services:
+
+  android:
+    image: donvito/docker-android-x86-8.1
+    # image: budtmo/docker-android-x86-8.1
+    privileged: true
+    # Increase scale number if needed
+    scale: 1
+    ports:
+      - 6080:6080
+      - 4723:4723
+    volumes:
+      - $PWD/5bc1dc75.0:/root/5bc1dc75.0
+    environment:
+      - DEVICE=Samsung Galaxy S6
+      - APPIUM=true      
+      - HTTP_PROXY="http://vito_cerberus-executor_1:44444"
+      - HTTPS_PROXY="http://vito_cerberus-executor_1:44444"
+      - ENABLE_PROXY_ON_EMULATOR=true
+
+  executor:
+    image: donvito/cerberus-executor:latest
+    ports:
+      - "8092:8092"
+      - "8080:8080"
+      - "44444:44444"
+    restart: always
