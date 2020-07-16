@@ -61,8 +61,9 @@ function enable_proxy_if_needed () {
 		echo "Install proxy certificate"
 		adb push ./5bc1dc75.0 /data/misc/user/0/cacerts-added/5bc1dc75.0
 		adb shell "su 0 chmod 644 /data/misc/user/0/cacerts-added/5bc1dc75.0"
-		adb reboot
 		
+		adb shell "su 0 svc wifi disable"
+				
         adb unroot
       else
         echo "Please use http:// in the beginning!"
